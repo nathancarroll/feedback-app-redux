@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
+import {HashRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+
+import Header from '../Header/Header';
+import HorizontalLabelPositionBelowStepper from '../Stepper/Stepper';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Feedback!</h1>
-          <h4><i>Don't forget it!</i></h4>
-        </header>
-        <br/>
+        <Header />
+        <HorizontalLabelPositionBelowStepper />
       </div>
     );
   }
