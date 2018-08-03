@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-class FeedbackCard extends Component {
+class FeedbackView extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -20,7 +21,8 @@ class FeedbackCard extends Component {
             type: 'FEEDBACK_STEP',
             payload: this.state
         })
-        this.props.history.push(`/${this.props.next}`);
+        // this.props.history.push(`/${this.props.next}`);
+        window.location.href = this.props.next;
     }
 
     render(){
@@ -34,4 +36,4 @@ class FeedbackCard extends Component {
     }
 }
 
-export default FeedbackCard;
+export default connect()(FeedbackView);

@@ -15,8 +15,14 @@ const emptyFeedback = {
     comments: ''
 }
 
-const feedback = (state=emptyFeedback) => {
+const feedback = (state=emptyFeedback, action) => {
     console.log('im a reducer');
+    if (action.type === 'FEEDBACK_STEP'){
+        state = {
+            ...state,
+            ...action.payload
+        }
+    }
     return state;
 }
 
