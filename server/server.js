@@ -37,6 +37,19 @@ app.post('/api/feedback/', (req, res) => {
         })
 })
 
+app.delete('/api/feedback/:id', (req, res) => {
+    console.log('reached feedback DELETE route', req.params.id);
+    pool.query(`DELETE FROM "feedback" WHERE "id" = $1;`, [req.params.id])
+        .then((PGres) => {
+            console.log(PGres);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error during DELETE', err);
+            res.sendStatus(500);
+        })
+})
+
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

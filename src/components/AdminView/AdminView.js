@@ -30,15 +30,30 @@ class AdminView extends Component {
     }
 
     componentDidMount = () => {
+        this.getFeedback();
+    }
+
+    getFeedback = () => {
         axios.get('/api/feedback')
+        .then((res) => {
+            console.log(res.data);
+            this.setState({
+                feedbackList: res.data
+            })
+        })
+        .catch((err) => {
+            console.log('error during feedback get', err);
+        })
+    }
+
+    handleDelete = (ID) => {
+        axios.delete(`/api/feedback/${ID}`)
             .then((res) => {
-                console.log(res.data);
-                this.setState({
-                    feedbackList: res.data
-                })
+                console.log(res);
+                this.getFeedback();
             })
             .catch((err) => {
-                console.log('error during feedback get', err);
+                console.log('error during delete', err);
             })
     }
 
@@ -55,6 +70,7 @@ class AdminView extends Component {
                             <TableCell>Support</TableCell>
                             <TableCell>Comments</TableCell>
                             <TableCell>Date</TableCell>
+                            <TableCell>Delete</TableCell>                            
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -66,6 +82,7 @@ class AdminView extends Component {
                                     <TableCell>{n.support}</TableCell>
                                     <TableCell>{n.comments}</TableCell>
                                     <TableCell>{n.date.split('T05')[0]}</TableCell>
+                                    <TableCell><button onClick={() => this.handleDelete(n.id)}>Delete</button></TableCell>
                                 </TableRow>
                             );
                         })}
