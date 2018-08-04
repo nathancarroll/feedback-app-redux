@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import Header from '../Header/Header';
 import FeedbackStepper from '../Stepper/Stepper';
+import RadioInput from '../RadioInput/RadioInput';
+import NavButtons from '../NavButtons/NavButtons';
 
 class FeedbackView extends Component {
     constructor(props){
@@ -19,12 +21,10 @@ class FeedbackView extends Component {
     }
 
     handleNext = () => {
-        console.log('next is', this.props.next);
         this.props.dispatch({
             type: 'FEEDBACK_STEP',
             payload: this.state
         })
-        // this.props.history.push(`/${this.props.next}`);
         window.location.href = this.props.next;
     }
 
@@ -34,8 +34,8 @@ class FeedbackView extends Component {
                 <Header />
                 <FeedbackStepper step={this.props.step}/>
                 <p>{this.props.prompt}</p>
-                <input onChange={this.handleChange} type="text" />
-                <button onClick={this.handleNext}>Next</button>
+                <RadioInput name={this.props.name}/>
+                <NavButtons next={this.props.next} back={this.props.back}/>
             </div>
         )
     }

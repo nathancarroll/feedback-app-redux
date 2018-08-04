@@ -9,9 +9,9 @@ import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 
 const emptyFeedback = {
-    feeling: '',
-    understanding: '',
-    support: '',
+    feeling: '5',
+    understanding: '3',
+    support: '5',
     comments: ''
 }
 
