@@ -24,34 +24,10 @@ function getSteps() {
 }
 
 class FeedbackStepper extends React.Component {
-  state = {
-    activeStep: 0,
-  };
-
-  handleNext = () => {
-    const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep + 1,
-    });
-  };
-
-  handleBack = () => {
-    const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep - 1,
-    });
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
 
   render() {
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
 
     return (
       <div className={classes.root}>

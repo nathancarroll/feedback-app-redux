@@ -4,37 +4,27 @@ import {connect} from 'react-redux';
 import Header from '../Header/Header';
 import FeedbackStepper from '../Stepper/Stepper';
 import RadioInput from '../RadioInput/RadioInput';
+import TextInput from '../TextInput/TextInput';
 import NavButtons from '../NavButtons/NavButtons';
 
 class FeedbackView extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            [this.props.name]: ''
-        }
-    }
-
-    handleChange = (event) => {
-        this.setState({
-            [this.props.name]: event.target.value
-        })
-    }
-
-    handleNext = () => {
-        this.props.dispatch({
-            type: 'FEEDBACK_STEP',
-            payload: this.state
-        })
-        window.location.href = this.props.next;
-    }
 
     render(){
+        let displayElement;
+        if (this.props.radio){
+            displayElement = <RadioInput name={this.props.name} />
+        } else if (this.props.text){
+            displayElement = <TextInput name={this.props.name} />
+        } else {
+            displayElement = <p>Thank you for submitting your feedback!</p>
+        }
+
         return(
             <div>
                 <Header />
                 <FeedbackStepper step={this.props.step}/>
                 <p>{this.props.prompt}</p>
-                <RadioInput name={this.props.name}/>
+                {displayElement}
                 <NavButtons next={this.props.next} back={this.props.back}/>
             </div>
         )
