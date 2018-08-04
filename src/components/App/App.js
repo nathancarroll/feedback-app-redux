@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import {HashRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
-import Header from '../Header/Header';
-import HorizontalLabelPositionBelowStepper from '../Stepper/Stepper';
 import FeedbackView from '../FeedbackView/FeedbackView';
 import './App.css';
 
@@ -40,7 +38,11 @@ class App extends Component {
   render() {
     const allRoutes = this.pageSettings.map((pageConfig, index) => {
       return (
-        <Route exact path={'/' + pageConfig.name} render={() => <FeedbackView {...pageConfig} />} />
+        <Route 
+          key={index} 
+          exact path={'/' + pageConfig.name} 
+          render={() => <FeedbackView step={index} {...pageConfig} />} 
+        />
       )
     })
 
@@ -48,8 +50,6 @@ class App extends Component {
       <div className="App">
       <Router>
         <div>
-        <Header />
-        <HorizontalLabelPositionBelowStepper />
         {allRoutes}
         </div>
       </Router>

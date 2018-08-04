@@ -16,7 +16,6 @@ const emptyFeedback = {
 }
 
 const feedback = (state=emptyFeedback, action) => {
-    console.log('im a reducer');
     if (action.type === 'FEEDBACK_STEP'){
         state = {
             ...state,

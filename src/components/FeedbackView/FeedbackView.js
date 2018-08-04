@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import Header from '../Header/Header';
+import FeedbackStepper from '../Stepper/Stepper';
+
 class FeedbackView extends Component {
     constructor(props){
         super(props)
@@ -28,6 +31,8 @@ class FeedbackView extends Component {
     render(){
         return(
             <div>
+                <Header />
+                <FeedbackStepper step={this.props.step}/>
                 <p>{this.props.prompt}</p>
                 <input onChange={this.handleChange} type="text" />
                 <button onClick={this.handleNext}>Next</button>

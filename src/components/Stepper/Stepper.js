@@ -24,20 +24,7 @@ function getSteps() {
   return ['Feeling', 'Understanding', 'Support', 'Comments', 'Done!'];
 }
 
-// function getStepContent(stepIndex) {
-//   switch (stepIndex) {
-//     case 0:
-//       return <FeedbackCard />;
-//     case 1:
-//       return 'What is an ad group anyways?';
-//     case 2:
-//       return 'This is the bit I really care about!';
-//     default:
-//       return 'Uknown stepIndex';
-//   }
-// }
-
-class HorizontalLabelPositionBelowStepper extends React.Component {
+class FeedbackStepper extends React.Component {
   state = {
     activeStep: 0,
   };
@@ -69,7 +56,7 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper activeStep={this.props.step} alternativeLabel>
           {steps.map(label => {
             return (
               <Step key={label}>
@@ -107,8 +94,4 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
   }
 }
 
-HorizontalLabelPositionBelowStepper.propTypes = {
-  classes: PropTypes.object,
-};
-
-export default withStyles(styles)(HorizontalLabelPositionBelowStepper);
+export default withStyles(styles)(FeedbackStepper);
