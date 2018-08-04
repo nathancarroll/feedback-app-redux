@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import Header from '../Header/Header';
 import FeedbackStepper from '../Stepper/Stepper';
@@ -9,6 +10,17 @@ import NavButtons from '../NavButtons/NavButtons';
 
 class FeedbackView extends Component {
 
+    componentDidMount = () => {
+        if (this.props.name !== 'done') return;
+        axios.post('/api/feedback', this.props.feedback)
+            .then((res) => {
+                console.log('feedback posted');
+            })
+            .catch((err) => {
+                console.log('error during post', err);
+            })
+    }
+
     render(){
         let displayElement;
         if (this.props.radio){
@@ -16,7 +28,7 @@ class FeedbackView extends Component {
         } else if (this.props.text){
             displayElement = <TextInput name={this.props.name} />
         } else {
-            displayElement = <p>Thank you for submitting your feedback!</p>
+            displayElement = null
         }
 
         return(
@@ -31,4 +43,6 @@ class FeedbackView extends Component {
     }
 }
 
-export default connect()(FeedbackView);
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps)(FeedbackView);

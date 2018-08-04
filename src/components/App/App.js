@@ -37,6 +37,14 @@ class App extends Component {
     text: true,
     next: '/#/done',
     back: '/#/support'
+  },
+  {
+    name: 'done',
+    prompt: 'Thank you for submitting your feedback!',
+    radio: false,
+    text: false,
+    next: '/#/feeling',
+    back: false
   }]
 
   render() {

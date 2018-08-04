@@ -16,7 +16,7 @@ class TextInput extends Component {
     render(){
         return(
             <div>
-                <textarea rows="8" cols="32" onChange={this.handleChange}/>
+                <textarea rows="12" cols="80" onChange={this.handleChange}/>
             </div>
         )
     }
