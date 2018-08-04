@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 
+import AdminView from '../AdminView/AdminView';
 import FeedbackView from '../FeedbackView/FeedbackView';
 import './App.css';
 
@@ -63,6 +64,7 @@ class App extends Component {
         <Router>
           <div>
             {allRoutes}
+            <Route exact path="/admin" component={AdminView} />
           </div>
         </Router>
       </div>

@@ -15,6 +15,9 @@ class FeedbackView extends Component {
         axios.post('/api/feedback', this.props.feedback)
             .then((res) => {
                 console.log('feedback posted');
+                this.props.dispatch({
+                    type: 'RESTART'
+                })
             })
             .catch((err) => {
                 console.log('error during post', err);

@@ -23,7 +23,6 @@ const styles = theme => ({
 class RadioInput extends React.Component {
 
     handleChange = event => {
-        // this.setState({ value: event.target.value });
         this.props.dispatch({
             type: 'FEEDBACK_STEP',
             payload: {

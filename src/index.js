@@ -10,7 +10,7 @@ import logger from 'redux-logger';
 
 const emptyFeedback = {
     feeling: '5',
-    understanding: '3',
+    understanding: '5',
     support: '5',
     comments: ''
 }
@@ -21,7 +21,10 @@ const feedback = (state=emptyFeedback, action) => {
             ...state,
             ...action.payload
         }
+    } else if (action.type === 'RESTART'){
+        state = emptyFeedback;
     }
+
     return state;
 }
 

@@ -11,6 +11,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('build'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
+app.get('/api/feedback', (req, res) => {
+    pool.query(`SELECT * FROM "feedback"`)
+        .then((PGres) => {
+            console.log(PGres);
+            res.send(PGres.rows);
+        })
+        .catch((err) => {
+            console.log('error during GET', err);
+            res.sendStatus(500);
+        })
+})
+
 app.post('/api/feedback/', (req, res) => {
     console.log('reached feedback POST route', req.body);
     pool.query(`INSERT INTO "feedback" ("feeling", "understanding", "support", "comments")

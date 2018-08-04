@@ -15,7 +15,7 @@ class NavButtons extends Component {
             <Button
                 onClick={() => window.location.href = this.props.next}
             >
-                Next
+                {this.props.next === '/#/feeling' ? 'Reset' : 'Next'}
             </Button>
             </div>
         )
