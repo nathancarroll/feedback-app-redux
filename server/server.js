@@ -12,7 +12,7 @@ app.use(express.static('build'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
 app.get('/api/feedback', (req, res) => {
-    pool.query(`SELECT * FROM "feedback"`)
+    pool.query(`SELECT * FROM "feedback" ORDER BY "id"`)
         .then((PGres) => {
             console.log(PGres);
             res.send(PGres.rows);
@@ -47,6 +47,19 @@ app.delete('/api/feedback/:id', (req, res) => {
         .catch((err) => {
             console.log('error during DELETE', err);
             res.sendStatus(500);
+        })
+})
+
+app.put('/api/feedback/:id', (req, res) => {
+    console.log('reached feedback PUT route', req.params.id);
+    pool.query(`UPDATE "feedback" SET "flagged" = NOT "flagged" WHERE "id" = $1;`, [req.params.id])
+        .then((PGres) => {
+            console.log(PGres);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('error during PUT', err);
+            res.sendStatus(500)
         })
 })
 

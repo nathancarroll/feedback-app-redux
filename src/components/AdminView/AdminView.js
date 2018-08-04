@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 import Header from '../Header/Header';
 
@@ -35,15 +34,27 @@ class AdminView extends Component {
 
     getFeedback = () => {
         axios.get('/api/feedback')
-        .then((res) => {
-            console.log(res.data);
-            this.setState({
+            .then((res) => {
+                console.log(res.data);
+                this.setState({
                 feedbackList: res.data
+                })
             })
-        })
-        .catch((err) => {
-            console.log('error during feedback get', err);
-        })
+            .catch((err) => {
+                console.log('error during feedback get', err);
+            })
+    }
+
+    handleFlag = (ID) => {
+        console.log('flagging', ID);
+        axios.put(`/api/feedback/${ID}`)
+            .then((res) => {
+                console.log(res);
+                this.getFeedback();
+            })
+            .catch((err) => {
+                console.log('error during PUT', err);
+            })
     }
 
     handleDelete = (ID) => {
@@ -61,7 +72,6 @@ class AdminView extends Component {
         return (
             <div>
             <Header admin />
-            <Paper>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -70,6 +80,7 @@ class AdminView extends Component {
                             <TableCell>Support</TableCell>
                             <TableCell>Comments</TableCell>
                             <TableCell>Date</TableCell>
+                            <TableCell>Flagged</TableCell>
                             <TableCell>Delete</TableCell>                            
                         </TableRow>
                     </TableHead>
@@ -82,13 +93,13 @@ class AdminView extends Component {
                                     <TableCell>{n.support}</TableCell>
                                     <TableCell>{n.comments}</TableCell>
                                     <TableCell>{n.date.split('T05')[0]}</TableCell>
+                                    <TableCell><p onClick={() => this.handleFlag(n.id)}>{n.flagged ? 'True' : 'False'}</p></TableCell>
                                     <TableCell><button onClick={() => this.handleDelete(n.id)}>Delete</button></TableCell>
                                 </TableRow>
                             );
                         })}
                     </TableBody>
                 </Table>
-            </Paper>
             </div>
         )
     }
