@@ -63,6 +63,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
+          <Redirect from="/" to="/feeling" />
             {allRoutes}
             <Route exact path="/admin" component={AdminView} />
           </div>
