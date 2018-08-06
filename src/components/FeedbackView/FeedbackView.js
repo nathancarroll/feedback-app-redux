@@ -8,6 +8,8 @@ import RadioInput from '../RadioInput/RadioInput';
 import TextInput from '../TextInput/TextInput';
 import NavButtons from '../NavButtons/NavButtons';
 
+import Paper from '@material-ui/core/Paper';
+
 class FeedbackView extends Component {
 
     componentDidMount = () => {
@@ -35,13 +37,13 @@ class FeedbackView extends Component {
         }
 
         return(
-            <div>
+            <Paper className="card" elevation={2}>
                 <Header />
                 <FeedbackStepper step={this.props.step}/>
                 <p>{this.props.prompt}</p>
                 {displayElement}
                 <NavButtons next={this.props.next} back={this.props.back}/>
-            </div>
+            </Paper>
         )
     }
 }
